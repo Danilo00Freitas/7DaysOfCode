@@ -5,8 +5,10 @@ public class Movie {
     private String imgUrl;
     private double nota;
     private int ano;
+    private int id;
 
     public Movie(MovieDados movieDados) {
+        this.id = movieDados.id();
         this.titulo = movieDados.titulo();
         this.imgUrl = movieDados.imgUrl();
         this.nota = movieDados.nota();

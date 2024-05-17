@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateConfig {
     @Bean
     public RestTemplate restTemplate() {
-        System.out.println("RestTemplate bean created and registered");
         return new RestTemplate();
     }
 }

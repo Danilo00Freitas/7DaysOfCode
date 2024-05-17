@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 
 public record MovieDados(
+        Integer id,
 
         @NotBlank @JsonProperty("original_title")
         String titulo,

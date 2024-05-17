@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,8 +27,12 @@ public class MovieController {
     private TmdbApiClient tmdbApiClient;
     @GetMapping
     @RequestMapping("/getTopRated")
-    public List<Movie> topRated(){
-        return tmdbApiClient.makeRequest();
+    public List<Movie> topRated(@RequestParam(name = "title", required = false) String title){
+        var response = tmdbApiClient.makeRequest(title);
+        response.forEach(movie -> {
+            System.out.println(movie.getTitulo());
+        });
+        return tmdbApiClient.makeRequest(title);
     }
 
     @GetMapping
