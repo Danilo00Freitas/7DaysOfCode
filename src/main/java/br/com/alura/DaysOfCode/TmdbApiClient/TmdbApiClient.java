@@ -53,8 +53,9 @@ public class TmdbApiClient {
                 String imgUrl = (String) result.get("poster_path");
                 Double nota = (Double) result.get("vote_average");
                 String ano = ((String) result.get("release_date")).substring(0, 4);
+                String completeImgUrl = "https://image.tmdb.org/t/p/w500" + imgUrl;
 
-                MovieDados movieDados = new MovieDados(id,titulo, imgUrl, nota, Integer.parseInt(ano));
+                MovieDados movieDados = new MovieDados(id,titulo, completeImgUrl, nota, Integer.parseInt(ano));
 
                 if (titleParam == null ||titleParam.isBlank()){
                     movieList.add(new Movie(movieDados));

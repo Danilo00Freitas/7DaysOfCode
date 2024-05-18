@@ -3,17 +3,16 @@ package br.com.alura.DaysOfCode.HtmlGenerator;
 import br.com.alura.DaysOfCode.Movie.Movie;
 
 import java.io.PrintWriter;
-import java.io.Writer;
-import java.util.Collection;
 import java.util.List;
 
 public class HtmlGenerator {
     private PrintWriter writer;
-    public HtmlGenerator(PrintWriter receivedWriter){
+
+    public HtmlGenerator(PrintWriter receivedWriter) {
         this.writer = receivedWriter;
     }
 
-    public void generateHtml(List<Movie> movieList){
+    public void generateHtml(List<Movie> movieList) {
         writeHeader();
         writeBodyStart();
         writeMovieCard(movieList);
@@ -36,8 +35,8 @@ public class HtmlGenerator {
     }
 
     private void writeBodyStart() {
-        writer.println("<div class=\"container-fluid\">");
-        writer.println("<div class=\"row border-dark\">");
+        writer.println("<div class=\"container-fluid justify-content-center text-center\">");
+        writer.println("<div class=\"row border-dark row-cols-1 p-3 justify-content-center g-3\">");
     }
 
     private void writeBodyEnd() {
@@ -45,18 +44,20 @@ public class HtmlGenerator {
         writer.println("</div>");
     }
 
-    private void writeMovieCard(List<Movie> movies){
-        writer.println("<div class=\"col-md-6\">");
-        for (Movie movie : movies){
-            writer.println("""
-                    <div class=\\"card text-white bg-dark mb-3\\" style=\\"max-width: 18rem;\\">
-                                              	<h4 class=\\"card-header\\">%s</h4>
-                                              	<div class=\\"card-body\\">
-                                              		<img class=\\"card-img\\" src=\\"%s\\" alt=\\"%s\\">
-                                              		<p class=\\"card-text mt-2\\">Nota: %s - Ano: %s</p>
-                                              	</div>
-                                              </div>
-                    """.formatted(movie.getTitulo(),movie.getImgUrl(),movie.getTitulo(),movie.getNota(),movie.getAno()));
+    private void writeMovieCard(List<Movie> movies) {
+        writer.println("<div class=\"row row-cols-1 row-cols-md-2 row-cols-lg-5 gx-3 p-3 justify-content-center\">");
+        for (Movie movie : movies) {
+            writer.println(
+                    "<div class=\"col mx-auto text-center\">" +
+                            "<div class=\"card text-white bg-dark mb-3\" style=\"max-width: 18rem;\">" +
+                            "<h4 class=\"card-header\">" + movie.getTitulo() + "</h4>" +
+                            "<div class=\"card-body\">" +
+                            "<img class=\"card-img\" src=\"" + movie.getImgUrl() + "\" alt=\"" + movie.getTitulo() + "\">" +
+                            "<p class=\"card-text mt-2\">Nota: " + movie.getNota() + " - Ano: " + movie.getAno() + "</p>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>"
+            );
         }
         writer.println("</div>");
     }

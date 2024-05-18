@@ -1,6 +1,7 @@
 package br.com.alura.DaysOfCode.Controller;
 
 /*import br.com.alura.DaysOfCode.ApplicationConfigs.RestTemplateConfig;*/
+import br.com.alura.DaysOfCode.HtmlGenerator.HtmlGenerator;
 import br.com.alura.DaysOfCode.Movie.Movie;
 import br.com.alura.DaysOfCode.Movie.MovieDados;
 import br.com.alura.DaysOfCode.TmdbApiClient.TmdbApiClient;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +34,16 @@ public class MovieController {
         response.forEach(movie -> {
             System.out.println(movie.getTitulo());
         });
-        return tmdbApiClient.makeRequest(title);
+
+        try{
+            PrintWriter printWriter = new PrintWriter("src/main/resources/content.html");
+            new HtmlGenerator(printWriter).generateHtml(response);
+            printWriter.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        return response;
     }
 
     @GetMapping
